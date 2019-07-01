@@ -89,6 +89,25 @@ function MGStep(x_t, x_history, timeStep, index; deltat = 0.1,
     return x_t, x_t_plus_deltat, x_history, nextIndex, nextTime
 end
 
+"""
+    X, T, x0, deltat, tau, x_history, x_t = MGInit(X, T)
+
+Fixe all variables to run an `MGStep(...)`
+
+Advanced : MGInit(X, T; sample_n = 12000,
+        x0 = 1.2, deltat = 0.1, tau = 17, a = 0.2, b = 0.1)
+"""
+function MGInit(X, T; sample_n = 12000,
+        x0 = 1.2, deltat = 0.1, tau = 17, a = 0.2, b = 0.1)
+    index = 1;
+    history_length = Int64(floor(tau/deltat))
+    x_history = zeros(history_length) # here we assume x(t)=0 for -tau <= t < 0
+    x_t = x0;
+    T[1] = timeStep
+    X[1] = x0
+    return X, T, x0, deltat, tau, x_history, x_t
+end
+
 # Exemple ( using Plots )
 # using Plots
 # T,X = MGGenerator()
