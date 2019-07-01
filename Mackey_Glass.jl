@@ -91,4 +91,4 @@ end
 # Exemple ( using Plots )
 # using Plots
 # T,X = MGGenerator()
-# plot(T, X)
+# plot(T, X, label = "Mackey Glass")
