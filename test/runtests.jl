@@ -1,3 +1,3 @@
-include("Mackey_Glass.jl")
+using Mackey_Glass.jl
 
 T,X = MGGenerator();
