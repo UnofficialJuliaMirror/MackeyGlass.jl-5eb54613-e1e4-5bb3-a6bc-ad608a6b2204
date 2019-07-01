@@ -7,7 +7,6 @@
 #   time-series-generator?s_tid=prof_contriblnk                                #
 ################################################################################
 
-
 """
     mackeyglass_eq(x_t, x_t_minus_tau, a , b)
 
