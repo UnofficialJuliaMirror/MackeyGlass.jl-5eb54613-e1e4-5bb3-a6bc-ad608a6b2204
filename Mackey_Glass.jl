@@ -41,18 +41,7 @@ By default :\n
 `sample_n = 12000`	# total no. of samples, excluding the given initial condition\n
 """
 function MGGenerator(;sample_n = 12000, x0 = 1.2, deltat = 0.1, tau = 17, a = 0.2, b = 0.1)
-    interval = 1;	    # output is printed at every 'interval' time steps
-
-    timeStep = 0
-    index = 1
-    history_length = Int64(floor(tau/deltat))
-    x_history = zeros(history_length) # here we assume x(t)=0 for -tau <= t < 0
-    x_t = x0;
-
-    X = zeros(sample_n+1, 1) .* NaN; # vector of all generated x samples
-    T = zeros(sample_n+1, 1); # vector of time samples
-    T[1] = timeStep
-    X[1] = x0
+    X, T, x0, deltat, tau, x_history, x_t, index = MGInit()
     for i = 2:sample_n+1
         X[i], x_t, x_history, index, T[i] = MGStep(x_t,x_history, T[i-1],
             index; deltat = deltat, tau = tau, a = a, b = b)
@@ -90,25 +79,26 @@ function MGStep(x_t, x_history, timeStep, index; deltat = 0.1,
 end
 
 """
-    X, T, x0, deltat, tau, x_history, x_t = MGInit(X, T)
+    X, T, x0, deltat, tau, x_history, x_t, index = MGInit()
 
 Fixe all variables to run an `MGStep(...)`
 
-Advanced : MGInit(X, T; sample_n = 12000,
+Advanced : `MGInit(; sample_n = 12000, timeStep = 0,
         x0 = 1.2, deltat = 0.1, tau = 17, a = 0.2, b = 0.1)
 """
-function MGInit(X, T; sample_n = 12000,
+function MGInit(; sample_n = 12000, timeStep = 0,
         x0 = 1.2, deltat = 0.1, tau = 17, a = 0.2, b = 0.1)
-    index = 1;
     history_length = Int64(floor(tau/deltat))
     x_history = zeros(history_length) # here we assume x(t)=0 for -tau <= t < 0
     x_t = x0;
+    X = zeros(sample_n+1, 1) .* NaN; # vector of all generated x samples
+    T = zeros(sample_n+1, 1); # vector of time samples
     T[1] = timeStep
     X[1] = x0
-    return X, T, x0, deltat, tau, x_history, x_t
+    return X, T, x0, deltat, tau, x_history, x_t, 1
 end
 
-# Exemple ( using Plots )
-# using Plots
-# T,X = MGGenerator()
-# plot(T, X, label = "Mackey Glass")
+#Exemple ( Need Plots )
+#using Plots
+#T,X = MGGenerator()
+#plot(T, X, label = "Mackey Glass")
