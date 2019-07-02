@@ -1,3 +1,3 @@
-using Mackey_Glass
+using MackeyGlass
 
 X, T = MGGenerator();
