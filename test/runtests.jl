@@ -1,3 +1,3 @@
-include("JonathanCourtois/mackey_Glass.jl/mackey_Glass.jl")
+Using Mackey_Glass
 
 X, T = MGGenerator();
