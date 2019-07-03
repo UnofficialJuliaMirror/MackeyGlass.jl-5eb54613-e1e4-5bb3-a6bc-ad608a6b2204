@@ -92,7 +92,6 @@ function MGInit(; sample_n = 12000, timeStep = 0,
     x_history = zeros(history_length) # here we assume x(t)=0 for -tau <= t < 0
     x_t = x0;
     X = zeros(sample_n+1, xwidth) .* NaN; # vector of all generated x samples
-    # there is two
     T = zeros(sample_n+1, 1); # vector of time samples
     T[1] = timeStep
     [X[1,i] = x0 for i=1:xwidth]
