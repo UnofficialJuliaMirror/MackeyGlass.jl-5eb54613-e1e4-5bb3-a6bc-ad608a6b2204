@@ -1,4 +1,4 @@
-# Mackey_Glass.jl
+# MackeyGlass.jl
 Julia scripts to generate Mackey Glass time series.
 
 ## Info
