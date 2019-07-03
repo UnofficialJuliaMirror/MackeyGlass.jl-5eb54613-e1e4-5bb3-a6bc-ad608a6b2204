@@ -9,6 +9,7 @@
 
 """
     mackeyglass_eq(x_t, x_t_minus_tau, a , b)
+
 """
 mackeyglass_eq(x_t, x_t_minus_tau, a, b) =
     -b*x_t + a*x_t_minus_tau/(1 + x_t_minus_tau^10.0);
@@ -16,6 +17,7 @@ mackeyglass_eq(x_t, x_t_minus_tau, a, b) =
 
 """
     mackeyglass_rk4(x_t, x_t_minus_tau, deltat a , b)
+
 """
 function mackeyglass_rk4(x_t, x_t_minus_tau, deltat, a, b)
     k1 = deltat*mackeyglass_eq(x_t,          x_t_minus_tau, a, b);
@@ -27,7 +29,9 @@ end
 
 """
     T,X = MGGenerator()
+
 Advanced : T,X = MGGenerator(;sample_n, x0, deltat, tau, a, b)
+
 By default :\n
 `a = 0.2`     # value for a in eq (1)\n
 `b = 0.1`     # value for b in eq (1)\n
@@ -47,7 +51,9 @@ end
 
 """
     X[i], x_t, x_history, index, T[i] = MGStep(x_t,x_history, T[i-1],index)
+
 Advanced : `X[i], x_t, x_history, index, T[i] = MGStep(x_t,x_history, T[i-1], index; deltat, tau, a, b)`
+
 By default :\n
 `a = 0.2`     # value for a in eq (1)\n
 `b = 0.1`     # value for b in eq (1)\n
@@ -74,19 +80,22 @@ end
 
 """
     X, T, x0, deltat, tau, x_history, x_t, index = MGInit()
+
 Fixe all variables to run an `MGStep(...)`
+
 Advanced : `MGInit(; sample_n = 12000, timeStep = 0,
         x0 = 1.2, deltat = 0.1, tau = 17, a = 0.2, b = 0.1)
 """
 function MGInit(; sample_n = 12000, timeStep = 0,
-        x0 = 1.2, deltat = 0.1, tau = 17, a = 0.2, b = 0.1)
+        x0 = 1.2, deltat = 0.1, tau = 17, a = 0.2, b = 0.1, xwidth = 1)
     history_length = Int64(floor(tau/deltat))
     x_history = zeros(history_length) # here we assume x(t)=0 for -tau <= t < 0
     x_t = x0;
-    X = zeros(sample_n+1, 1) .* NaN; # vector of all generated x samples
+    X = zeros(sample_n+1, xwidth) .* NaN; # vector of all generated x samples
+    # there is two
     T = zeros(sample_n+1, 1); # vector of time samples
     T[1] = timeStep
-    X[1] = x0
+    [X[1,i] = x0 for i=1:xwidth]
     return X, T, x0, deltat, tau, x_history, x_t, 1
 end
 
