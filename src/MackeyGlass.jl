@@ -1,4 +1,4 @@
-################################ MACKEY_GLASS ##################################
+################################ MACKEYGLASS ###################################
 #   Author : J.Courtois                                                        #
 #   This script generates a Mackey-Glass time series using the 4th order       #
 #   Runge-Kutta method. The code is a straighforward translation in Julia      #
