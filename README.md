@@ -9,13 +9,13 @@ in Julia of Matlab code, available [here](https://ww2.mathworks.cn/matlabcentral
 
 ## Exemple
 
-'''
-using MackeyGlass
-using Plots
+```julia
+ using MackeyGlass
+ using Plots
 
-T,X = MGGenerator()
-plot(T, X, label = "Mackey Glass")
-'''
+ T,X = MGGenerator()
+ plot(T, X, label = "Mackey Glass")
+```
 <p align="center">
 <img width="400px" src="https://github.com/JonathanCourtois/Mackey-Glass-Generator/blob/master/MGplot.png"/>
 </p>
